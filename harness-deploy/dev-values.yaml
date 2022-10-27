@@ -1,4 +1,5 @@
-name: payment-service-workshop
+
+name: payment-service
 replicas: 1
 
 image: <+artifact.image>
@@ -18,7 +19,7 @@ servicePort: 8080
 serviceTargetPort: 8080
 
 #Templatise this using harness variables.
-sename: "bootcamp"
+sename: <+pipeline.variables.seusername>
 
 # Specify all environment variables to be added to the container.
 # The following two maps, config and secrets, are put into a ConfigMap
@@ -28,7 +29,7 @@ sename: "bootcamp"
 env:
   config:
   #  HARNESS_FF_KEY: key
-  #  HARNESS_SE: seusername
+    HARNESS_SE: <+pipeline.variables.seusername>
     HARNESS_BUILD: <+pipeline.sequenceId>
   secrets:
     key2: value2
